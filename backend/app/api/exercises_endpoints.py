@@ -10,4 +10,8 @@ router = APIRouter()
 
 @router.get("/exercises")
 def get_exercices():
-    return {"exercises": "squat lol"}
+    return {"exercises": [
+        {"name": "Push-ups", "description": "A bodyweight exercise that targets the chest, shoulders, and triceps."},
+        {"name": "Squats", "description": "A lower body exercise that targets the quadriceps, hamstrings, and glutes."},
+        {"name": "Pull-ups", "description": "An upper body exercise that targets the back, shoulders, and biceps."}
+    ]}
