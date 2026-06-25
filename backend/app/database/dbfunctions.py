@@ -1,1 +1,0 @@
-# Contains functions to query the database

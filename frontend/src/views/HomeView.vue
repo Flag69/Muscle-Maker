@@ -5,14 +5,27 @@
   <div></div>
 
   <!-- Div to place generation buttons -->
-  <div></div>
+  <div>
+    <button @click="handleGenerateProgram">Generate</button>
+  </div>
 
   <!-- Div to display generated program -->
-  <div></div> 
+  <div v-if="generatedProgram">
+    {{ generatedProgram }}
+  </div> 
 
 </template>
 
 <script setup>
+import { ref } from "vue"
+import { generate_program } from "@/services/api"
+
+const generatedProgram = ref()
+
+async function handleGenerateProgram() {
+  generatedProgram.value = await generate_program()
+}
+
 </script>
 
 <style scoped>
