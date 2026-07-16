@@ -1,4 +1,7 @@
 <template>
+
+    <h4>Basic parameters</h4>
+
     <label for="durationFilter">Program's duration: </label>
     <select name="durationFilter" id="durationFilter">
         <option value="30">30 minutes</option>
@@ -18,61 +21,51 @@
         <option value="4">Advanced</option>
     </select>
 
-  <h2>Equipment Available</h2>
+    <h4>Targeted muscle groups</h4>
 
-  <label>
-    <input
-      type="checkbox"
-      value="Barbell"
-      v-model="equipment"
-    />
-    Barbell
-  </label>
+        <div class="checkbox-group">
+            <label v-for="item in musclegroupsOptions" :key="item" class="checkbox-label">
+                <input type="checkbox" :value="item" v-model="musclegroups" />
 
-  <br>
+                {{ item }}
 
-  <label>
-    <input
-      type="checkbox"
-      value="Dumbbells"
-      v-model="equipment"
-    />
-    Dumbbells
-  </label>
+            </label>
+        </div>
 
-  <br>
-
-  <label>
-    <input
-      type="checkbox"
-      value="Machines"
-      v-model="equipment"
-    />
-    Machines
-  </label>
-
-  <br>
-
-  <label>
-    <input
-      type="checkbox"
-      value="Bodyweight"
-      v-model="equipment"
-    />
-    Bodyweight
-  </label>
-
-  <p>Selected equipment:</p>
-  <pre>{{ equipment }}</pre>
+        <p>Selected muscle groups:</p>
+        <pre>{{ musclegroups }}</pre>
 
 </template>
 
 <script setup>
 import { ref } from "vue"
 
-const equipment = ref([])
+const musclegroups = ref([])
+
+const musclegroupsOptions = [
+    "Everything",
+    "Chest",
+    "Shoulders and traps",
+    "Arms",
+    "Back",
+    "Legs",
+    "Core"
+]
 
 </script>
 
 <style scoped> 
+
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 0.5fr));
+    gap: 0.3rem 0.5rem;
+}
+
 </style>
