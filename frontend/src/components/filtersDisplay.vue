@@ -25,11 +25,29 @@
                 <option value="4">Advanced</option>
             </select>
         </div>
+
+        <div class="filter-container-row">
+            <label for="goal">Goal: </label>
+            <select name="goal" id="goal">
+                <option value="1">No particular goal</option>
+                <option value="1">Muscle gain</option>
+                <option value="2">Strength training</option>
+                <option value="3">Endurance</option>
+            </select>
+        </div>
+
     </div>
 
-    <h4>Targeted muscle groups</h4>
+    <h4>
+        targeted muscle groups
+        <span>
+        <button @click="showMusclegroups = !showMusclegroups">
+        {{ showMusclegroups ? "▼" : "▶" }}
+        </button>
+    </span>
+    </h4>
 
-    <div class="checkbox-group">
+    <div class="checkbox-group" v-if="showMusclegroups">
         <label v-for="item in musclegroupsOptions" :key="item" class="checkbox-label">
             <input type="checkbox" :value="item" v-model="musclegroups" @change="toggleMuscleGroup(item)" />
 
@@ -38,9 +56,16 @@
         </label>
     </div>
 
-    <h4>Available equipment</h4>
+    <h4>
+        Available equipment
+        <span>
+        <button @click="showEquipment = !showEquipment">
+        {{ showEquipment ? "▼" : "▶" }}
+        </button>
+    </span>
+    </h4>
 
-    <div class="checkbox-group">
+    <div class="checkbox-group" v-if="showEquipment">
         <label v-for="item in availableEquipmentOptions" :key="item" class="checkbox-label">
             <input type="checkbox" :value="item" v-model="availableEquipment" @change="toggleAvailableEquipment(item)" />
 
@@ -62,6 +87,9 @@ import { ref } from "vue"
 
 const musclegroups = ref(["Everything"])
 const availableEquipment = ref(["Everything"])
+
+const showEquipment = ref(false)
+const showMusclegroups = ref(false)
 
 const musclegroupsOptions = [
     "Everything",
@@ -103,9 +131,14 @@ function toggleMuscleGroup(item) {
 function toggleAvailableEquipment(item) {
     if (item === 'Everything') {
         availableEquipment.value = ['Everything']
+    } else if (item === 'Nothing (bodyweight only)') {
+        availableEquipment.value = ['Nothing (bodyweight only)']
     } else {
         availableEquipment.value = availableEquipment.value.filter(
             equip => equip !== 'Everything'
+        )
+        availableEquipment.value = availableEquipment.value.filter(
+            equip => equip !== 'Nothing (bodyweight only)'
         )
     }
 }
