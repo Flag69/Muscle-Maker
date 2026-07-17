@@ -1,0 +1,11 @@
+[
+    {
+        "name": "Bench Press",
+        "description": "A compound exercise that targets the chest, shoulders, and triceps.",
+        "experienceLevel": 3,
+        "difficultyLevel": 7,
+        "primaryMuscles": ["Chest"],
+        "secondaryMuscles": ["Arms"],
+        "requiredEquipments": ["Barbell", "Bench"]
+    }
+]

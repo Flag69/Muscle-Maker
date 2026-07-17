@@ -41,15 +41,15 @@
     <h4>
         targeted muscle groups
         <span>
-        <button @click="showMusclegroups = !showMusclegroups">
-        {{ showMusclegroups ? "▼" : "▶" }}
+        <button @click="showMuscleGroups = !showMuscleGroups">
+        {{ showMuscleGroups ? "▼" : "▶" }}
         </button>
     </span>
     </h4>
 
-    <div class="checkbox-group" v-if="showMusclegroups">
-        <label v-for="item in musclegroupsOptions" :key="item" class="checkbox-label">
-            <input type="checkbox" :value="item" v-model="musclegroups" @change="toggleMuscleGroup(item)" />
+    <div class="checkbox-group" v-if="showMuscleGroups">
+        <label v-for="item in muscleGroupsOptions" :key="item" class="checkbox-label">
+            <input type="checkbox" :value="item" v-model="muscleGroups" @change="toggleMuscleGroup(item)" />
 
             {{ item }}
 
@@ -75,7 +75,7 @@
     </div>
 
         <p>Selected muscle groups:</p>
-        <pre>{{ musclegroups }}</pre>
+        <pre>{{ muscleGroups }}</pre>
 
         <p>Selected available equipment:</p>
         <pre>{{ availableEquipment }}</pre>
@@ -85,13 +85,13 @@
 <script setup>
 import { ref } from "vue"
 
-const musclegroups = ref(["Everything"])
+const muscleGroups = ref(["Everything"])
 const availableEquipment = ref(["Everything"])
 
 const showEquipment = ref(false)
-const showMusclegroups = ref(false)
+const showMuscleGroups = ref(false)
 
-const musclegroupsOptions = [
+const muscleGroupsOptions = [
     "Everything",
     "Chest",
     "Shoulders and traps",
@@ -120,9 +120,9 @@ const availableEquipmentOptions = [
 
 function toggleMuscleGroup(item) {
     if (item === 'Everything') {
-        musclegroups.value = ['Everything']
+        muscleGroups.value = ['Everything']
     } else {
-        musclegroups.value = musclegroups.value.filter(
+        muscleGroups.value = muscleGroups.value.filter(
             group => group !== 'Everything'
         )
     }
