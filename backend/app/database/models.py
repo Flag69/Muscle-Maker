@@ -20,3 +20,6 @@ class Exercise(Base):
     primaryMuscles = Column(JSON, nullable=True)
     secondaryMuscles = Column(JSON, nullable=True)
     requiredEquipments = Column(JSON, nullable=True)
+    defaultReps = Column(Integer, nullable=True)
+    defaultSets = Column(Integer, nullable=True)
+    defaultRest = Column(Integer, nullable=True) # in seconds

@@ -6,6 +6,9 @@
         "difficultyLevel": 7,
         "primaryMuscles": ["Chest"],
         "secondaryMuscles": ["Arms"],
-        "requiredEquipments": ["Barbell", "Bench"]
+        "requiredEquipments": ["Barbell", "Bench"],
+        "avgReps": 8,
+        "avgSets": 3,
+        "avgRest": 120
     }
 ]
