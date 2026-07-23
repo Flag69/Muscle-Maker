@@ -98,7 +98,8 @@ const muscleGroupsOptions = [
     "Arms",
     "Back",
     "Legs",
-    "Core"
+    "Core",
+    "Cardiovascular system"
 ]
 
 const availableEquipmentOptions = [

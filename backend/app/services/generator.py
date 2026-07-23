@@ -1,5 +1,10 @@
 # Contains functions for workout generation and manipulation
 
+# TODO: stop exercises from being selected multiple times in the same workout
+
+import random
+from random import randint
+
 from app.database.db_functions import get_all_exercises, get_random_exercises
 
 def generate_workout(db_session, programDuration = 60, programDifficulty = 3, programGoal = None, targetedMuscleGroups = None, availableEquipments = None):
@@ -12,19 +17,30 @@ def generate_workout(db_session, programDuration = 60, programDifficulty = 3, pr
             main_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
             finisher_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
         case 75, 90:
-            pass
+            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            main_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
+            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
         case 105, 120:
-            pass
+            activation_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            main_p = get_random_exercises(db_session, count=4, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
+            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+
+    workout = add_exercises_to_workout(workout, activation_p, "activation_p", programGoal)
+    workout = add_exercises_to_workout(workout, main_p, "main_p", programGoal)
+    workout = add_exercises_to_workout(workout, finisher_p, "finisher_p", programGoal)
 
     return workout
 
 def add_exercises_to_workout(workout, exercises, programPart, programGoal):
+    setsMult, repsMult, restMult = get_program_params(programPart, programGoal)
     for exercise in exercises:
         exo = {
             "Name": exercise.name,
-            "Description": exercise.description
+            "Description": exercise.description,
+            "Sets": max(1,round(exercise.defaultSets * setsMult)  + randint(-1, 1)),
+            "Reps": max(1,round(exercise.defaultReps * repsMult) + randint(-1, 1)),
+            "Rest": max(1,round(exercise.defaultRest * restMult) + randint(-1, 1))
         }
-
 
         workout.append(exo)
     return workout
