@@ -1,5 +1,7 @@
 # Initializes the database connection
 
+# Use VSCode extension SQLite to visualize inside VSCode. Right click gym.db file, open database, see SQLITE EXPLORER in sidebar
+
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
