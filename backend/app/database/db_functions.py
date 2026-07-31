@@ -31,11 +31,23 @@ def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLev
 
         match targetedMuscleType:
             case "main":
-                if targetedMuscleGroups and exercise.primaryMuscles not in targetedMuscleGroups:
+                muscleIsTargeted = False
+                for muscle in targetedMuscleGroups:
+                    if muscle in exercise.primaryMuscles:
+                        muscleIsTargeted = True
+                        break
+                if not muscleIsTargeted:
                     continue
+
             case "secondary":
-                if targetedMuscleGroups and exercise.secondaryMuscles not in targetedMuscleGroups:
+                muscleIsTargeted = False
+                for muscle in targetedMuscleGroups:
+                    if muscle in exercise.secondaryMuscles:
+                        muscleIsTargeted = True
+                        break
+                if not muscleIsTargeted:
                     continue
+
         if available_equipment_set:
             if not set(exercise.requiredEquipments).issubset(available_equipment_set):
                 continue
