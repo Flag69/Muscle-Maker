@@ -1,7 +1,7 @@
 # Contains functions for workout generation and manipulation
 
 # TODO: stop exercises from being selected multiple times in the same workout
-
+# TODO: change mult ratios on get_program_params function
 from random import randint
 
 from app.database.db_functions import get_all_exercises, get_random_exercises

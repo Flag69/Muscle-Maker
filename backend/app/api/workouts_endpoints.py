@@ -11,6 +11,8 @@ router = APIRouter()
 @router.get("/workout")
 def get_workout():
 
-    workout = generate_workout(SessionLocal(), programDuration=60, programDifficulty=3, programGoal="strength", targetedMuscleGroups=["chest", "back"], availableEquipments=["dumbbell", "barbell"])
+    workout = generate_workout(SessionLocal(), programDuration=60, programDifficulty=3, programGoal="strength", targetedMuscleGroups=["Chest", "Back"], availableEquipments=["Dumbbell", "Barbell"])
     
-    return workout
+    return {
+        "exercises": workout
+    }

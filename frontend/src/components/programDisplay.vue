@@ -4,7 +4,7 @@
         <h2>Generated Program</h2>
 
         <div v-for="exercise in generatedProgram.exercises" :key="exercise.name">
-            <h3>{{ exercise.name }}</h3>
+            <h3>{{ exercise.Name }}</h3>
         </div>
         
     </div>

@@ -27,31 +27,34 @@ def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLev
 
     filtered_exercises = []
     available_equipment_set = (set(availableEquipments) if availableEquipments else None)
+
     for exercise in exercises:
 
-        match targetedMuscleType:
-            case "main":
-                muscleIsTargeted = False
-                for muscle in targetedMuscleGroups:
-                    if muscle in exercise.primaryMuscles:
-                        muscleIsTargeted = True
-                        break
-                if not muscleIsTargeted:
-                    continue
+        if targetedMuscleGroups != None:
+            match targetedMuscleType:
+                case "main":
+                    muscleIsTargeted = False
+                    for muscle in targetedMuscleGroups:
+                        if muscle in exercise.primaryMuscles:
+                            muscleIsTargeted = True
+                            break
+                    if not muscleIsTargeted:
+                        continue
 
-            case "secondary":
-                muscleIsTargeted = False
-                for muscle in targetedMuscleGroups:
-                    if muscle in exercise.secondaryMuscles:
-                        muscleIsTargeted = True
-                        break
-                if not muscleIsTargeted:
-                    continue
+                case "secondary":
+                    muscleIsTargeted = False
+                    for muscle in targetedMuscleGroups:
+                        if muscle in exercise.secondaryMuscles:
+                            muscleIsTargeted = True
+                            break
+                    if not muscleIsTargeted:
+                        continue
 
         if available_equipment_set:
             if not set(exercise.requiredEquipments).issubset(available_equipment_set):
                 continue
         filtered_exercises.append(exercise)
+
 
     selected_exercises = random.sample(filtered_exercises, min(count, len(filtered_exercises)))
 
