@@ -5,7 +5,7 @@
     <div class="filter-container">
         <div class="filter-container-row">
             <label for="durationFilter">Program's duration: </label>
-            <select name="durationFilter" id="durationFilter">
+            <select name="durationFilter" id="durationFilter" v-model="filters.programDuration">
                 <option value="30">30 minutes</option>
                 <option value="45">45 minutes</option>
                 <option value="60">1 hour</option>
@@ -18,7 +18,7 @@
 
         <div class="filter-container-row">
             <label for="levelFilter">Experience: </label>
-            <select name="levelFilter" id="levelFilter">
+            <select name="levelFilter" id="levelFilter" v-model="filters.programDifficulty">
                 <option value="1">Just started</option>
                 <option value="2">Beginner</option>
                 <option value="3">Intermediate</option>
@@ -28,11 +28,11 @@
 
         <div class="filter-container-row">
             <label for="goal">Goal: </label>
-            <select name="goal" id="goal">
-                <option value="1">No particular goal</option>
-                <option value="1">Muscle gain</option>
-                <option value="2">Strength training</option>
-                <option value="3">Endurance</option>
+            <select name="goal" id="goal" v-model="filters.programGoal">
+                <option value="no particular goal">No particular goal</option>
+                <option value="hypertrophy">Muscle gain</option>
+                <option value="strength">Strength training</option>
+                <option value="endurance">Endurance</option>
             </select>
         </div>
 
@@ -49,7 +49,7 @@
 
     <div class="checkbox-group" v-if="showMuscleGroups">
         <label v-for="item in muscleGroupsOptions" :key="item" class="checkbox-label">
-            <input type="checkbox" :value="item" v-model="muscleGroups" @change="toggleMuscleGroup(item)" />
+            <input type="checkbox" :value="item" v-model="filters.targetedMuscleGroups" @change="toggleMuscleGroup(item)" />
 
             {{ item }}
 
@@ -66,8 +66,8 @@
     </h4>
 
     <div class="checkbox-group" v-if="showEquipment">
-        <label v-for="item in availableEquipmentOptions" :key="item" class="checkbox-label">
-            <input type="checkbox" :value="item" v-model="availableEquipment" @change="toggleAvailableEquipment(item)" />
+        <label v-for="item in availableEquipmentsOptions" :key="item" class="checkbox-label">
+            <input type="checkbox" :value="item" v-model="filters.availableEquipments" @change="toggleAvailableEquipments(item)" />
 
             {{ item }}
 
@@ -75,18 +75,17 @@
     </div>
 
         <p>Selected muscle groups:</p>
-        <pre>{{ muscleGroups }}</pre>
+        <pre>{{ filters.targetedMuscleGroups }}</pre>
 
         <p>Selected available equipment:</p>
-        <pre>{{ availableEquipment }}</pre>
+        <pre>{{ filters.availableEquipments }}</pre>
 
 </template>
 
 <script setup>
 import { ref } from "vue"
 
-const muscleGroups = ref(["Everything"])
-const availableEquipment = ref(["Everything"])
+const filters = defineModel()
 
 const showEquipment = ref(false)
 const showMuscleGroups = ref(false)
@@ -102,7 +101,7 @@ const muscleGroupsOptions = [
     "Cardiovascular system"
 ]
 
-const availableEquipmentOptions = [
+const availableEquipmentsOptions = [
     "Everything",
     "Nothing (bodyweight only)",
     "Dumbbells",
@@ -121,24 +120,24 @@ const availableEquipmentOptions = [
 
 function toggleMuscleGroup(item) {
     if (item === 'Everything') {
-        muscleGroups.value = ['Everything']
+        filters.value.targetedMuscleGroups = ['Everything']
     } else {
-        muscleGroups.value = muscleGroups.value.filter(
+        filters.value.targetedMuscleGroups = filters.value.targetedMuscleGroups.filter(
             group => group !== 'Everything'
         )
     }
 }
 
-function toggleAvailableEquipment(item) {
+function toggleAvailableEquipments(item) {
     if (item === 'Everything') {
-        availableEquipment.value = ['Everything']
+        filters.value.availableEquipments = ['Everything']
     } else if (item === 'Nothing (bodyweight only)') {
-        availableEquipment.value = ['Nothing (bodyweight only)']
+        filters.value.availableEquipments = ['Nothing (bodyweight only)']
     } else {
-        availableEquipment.value = availableEquipment.value.filter(
+        filters.value.availableEquipments = filters.value.availableEquipments.filter(
             equip => equip !== 'Everything'
         )
-        availableEquipment.value = availableEquipment.value.filter(
+        filters.value.availableEquipments = filters.value.availableEquipments.filter(
             equip => equip !== 'Nothing (bodyweight only)'
         )
     }

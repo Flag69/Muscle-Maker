@@ -3,7 +3,7 @@
 
   <!-- Div to place filters -->
   <div>
-    <filtersDisplay />
+    <filtersDisplay v-model="filters" />
   </div>
 
   <!-- Div to place generation buttons -->
@@ -27,8 +27,24 @@ import filtersDisplay from "@/components/filtersDisplay.vue"
 
 const generatedProgram = ref(null)
 
+const filters = ref({
+  programDuration: 60,
+  programDifficulty: 1,
+  programGoal: "No particular goal",
+  targetedMuscleGroups: ["Everything"],
+  availableEquipments: ["Everything"]
+})
+
 async function handleGenerateProgram() {
-  generatedProgram.value = await generate_program()
+  generatedProgram.value = await generate_program(
+    {
+      programDuration: filters.value.programDuration,
+      programDifficulty: filters.value.programDifficulty,
+      programGoal: filters.value.programGoal,
+      targetedMuscleGroups: filters.value.targetedMuscleGroups,
+      availableEquipments: filters.value.availableEquipments
+    }
+  )
 }
 
 </script>

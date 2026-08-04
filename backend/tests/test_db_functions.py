@@ -12,6 +12,7 @@ def test_get_random_exercises_count_5():
     exos = get_random_exercises(db_session, count = 5)
     assert len(exos) == 5
     db_session.close()
+
 def test_get_random_exercises_count_1000():
     db_session = SessionLocal()
     exos = get_random_exercises(db_session, count = 1000)
@@ -19,13 +20,22 @@ def test_get_random_exercises_count_1000():
     assert len(exos) < 1000
     db_session.close()
 
-def test_get_random_exercises_params():
+def test_get_random_exercises_params_1():
     db_session = SessionLocal()
     exos = get_random_exercises(db_session, 3, 2, 4, ["Chest", "Arms"], "secondary", None)
     for exo in exos:
         assert exo.experienceLevel <= 2
         assert exo.difficultyLevel <= 4
         assert "Arms" in exo.secondaryMuscles or "Chest" in exo.secondaryMuscles
+    assert len(exos) == 3
+    db_session.close()
+
+def test_get_random_exercises_params_2():
+    db_session = SessionLocal()
+    exos = get_random_exercises(db_session, 3, 2, 4, ["Everything"], "secondary", ["Everything"])
+    for exo in exos:
+        assert exo.experienceLevel <= 2
+        assert exo.difficultyLevel <= 4
     assert len(exos) == 3
     db_session.close()
 

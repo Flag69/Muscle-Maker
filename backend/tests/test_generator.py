@@ -33,9 +33,16 @@ def test_add_exercises_to_workout_2():
     # print(workout)
     db_session.close()
 
-def test_generate_workout():
+def test_generate_workout_params_1():
     db_session = SessionLocal()
     workout = generate_workout(db_session, programDuration=60, programDifficulty=3, programGoal="strength", targetedMuscleGroups=["Chest"], availableEquipments=["Dumbbell"])
+    assert len(workout) > 0
+    # print(workout)
+    db_session.close()
+
+def test_generate_workout_params_2():
+    db_session = SessionLocal()
+    workout = generate_workout(db_session, programDuration=45, programDifficulty=2, programGoal="hypertrophy", targetedMuscleGroups=["Everything"], availableEquipments=["Barbell"])
     assert len(workout) > 0
     # print(workout)
     db_session.close()

@@ -30,7 +30,7 @@ def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLev
 
     for exercise in exercises:
 
-        if targetedMuscleGroups != None:
+        if targetedMuscleGroups != None and targetedMuscleGroups != ["Everything"]:
             match targetedMuscleType:
                 case "main":
                     muscleIsTargeted = False
