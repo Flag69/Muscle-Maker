@@ -11,9 +11,9 @@ def test_get_program_params_1():
 
 def test_get_program_params_2():
     sets, reps, rest = get_program_params("main_p", "endurance")
-    assert sets == 3
-    assert reps == 15
-    assert rest == 60
+    assert sets == 1
+    assert reps == 2
+    assert rest == 1
 
 def test_add_exercises_to_workout_1():
     db_session = SessionLocal()
@@ -31,6 +31,34 @@ def test_add_exercises_to_workout_2():
     add_exercises_to_workout(workout, exercises, "main_p", "hypertrophy")
     assert len(workout) == 8
     # print(workout)
+    db_session.close()
+
+def test_add_exercises_to_workout_3():
+    db_session = SessionLocal()
+    programDifficulty = 3
+    programGoal = "strength"
+    targetedMuscleGroups = ["Everything"]
+    availableEquipments = ["Everything"]
+    workout = []
+
+    warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments)
+    assert len(warm_up_p) == 1
+    activation_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
+    assert len(activation_p) == 3
+    main_p = get_random_exercises(db_session, count=4, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+    assert len(main_p) == 4
+    accessory_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 6, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
+    assert len(accessory_p) == 2
+    finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
+    assert len(finisher_p) == 2
+
+    workout = add_exercises_to_workout(workout, warm_up_p, "warm_up_p", programGoal)
+    workout = add_exercises_to_workout(workout, activation_p, "activation_p", programGoal)
+    workout = add_exercises_to_workout(workout, main_p, "main_p", programGoal)
+    workout = add_exercises_to_workout(workout, accessory_p, "accessory_p", programGoal)
+    workout = add_exercises_to_workout(workout, finisher_p, "finisher_p", programGoal)
+    # print(workout)
+    assert len(workout) == 12
     db_session.close()
 
 def test_generate_workout_params_1():

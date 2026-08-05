@@ -39,6 +39,42 @@ def test_get_random_exercises_params_2():
     assert len(exos) == 3
     db_session.close()
 
+def test_get_random_exercises_params_3():
+    db_session = SessionLocal()
+    exos = get_random_exercises(db_session, 3, 2, 4, ["Cardiovascular system"], "main", ["Everything"])
+    for exo in exos:
+        assert exo.experienceLevel <= 2
+        assert exo.difficultyLevel <= 4
+        print(exo.name, exo.primaryMuscles)
+        assert "Cardiovascular system" in exo.primaryMuscles
+    assert len(exos) == 3
+    db_session.close()
+
+def test_get_random_exercises_params_4():
+    db_session = SessionLocal()
+    exos = get_random_exercises(db_session, 1, 4, 3, ["Cardiovascular system"], "main", ["Everything"])
+    for exo in exos:
+        assert exo.experienceLevel <= 2
+        assert exo.difficultyLevel <= 4
+        print(exo.name, exo.primaryMuscles)
+        assert "Cardiovascular system" in exo.primaryMuscles
+    assert len(exos) == 1
+    db_session.close()
+
+def test_get_random_exercises_params_5():
+    db_session = SessionLocal()
+    exos = get_random_exercises(db_session, 1, 3, 3, ["Cardiovascular system"], "main", ["Everything"])
+    for exo in exos:
+        assert exo.experienceLevel <= 2
+        assert exo.difficultyLevel <= 4
+        print(exo.name, exo.primaryMuscles)
+        assert "Cardiovascular system" in exo.primaryMuscles
+    assert len(exos) == 1
+    db_session.close()
+
+
+
+
 def test_get_all_exercises():
     db_session = SessionLocal()
     exos = get_all_exercises(db_session)

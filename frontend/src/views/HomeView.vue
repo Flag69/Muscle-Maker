@@ -39,7 +39,7 @@ const showFilters = ref(false)
 const filters = ref({
   programDuration: 60,
   programDifficulty: 1,
-  programGoal: "No particular goal",
+  programGoal: "no particular goal",
   targetedMuscleGroups: ["Everything"],
   availableEquipments: ["Everything"]
 })

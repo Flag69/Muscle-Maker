@@ -12,20 +12,28 @@ def generate_workout(db_session, programDuration = 60, programDifficulty = 3, pr
 
     match programDuration:
         case 45 | 60:
-            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
-            main_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
-            finisher_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments)
+            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
+            main_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            accessory_p = []
+            finisher_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
         case 75 | 90:
-            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
-            main_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
-            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments)
+            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
+            main_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            accessory_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 6, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
+            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
         case 105 | 120:
-            activation_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
-            main_p = get_random_exercises(db_session, count=4, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
-            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments)
+            activation_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
+            main_p = get_random_exercises(db_session, count=4, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            accessory_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 6, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
+            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
 
+    workout = add_exercises_to_workout(workout, warm_up_p, "warm_up_p", programGoal)
     workout = add_exercises_to_workout(workout, activation_p, "activation_p", programGoal)
     workout = add_exercises_to_workout(workout, main_p, "main_p", programGoal)
+    workout = add_exercises_to_workout(workout, accessory_p, "accessory_p", programGoal)
     workout = add_exercises_to_workout(workout, finisher_p, "finisher_p", programGoal)
 
     return workout
@@ -54,24 +62,29 @@ def get_program_params(programPart, programGoal):
     return setsMult, repsMult, restMult
 
 TRAINING_PARAMETERS = {
+    "warm_up_p": {
+        "strength": {"setsMult": 1, "repsMult": 1, "restMult": 1},
+        "hypertrophy": {"setsMult": 1, "repsMult": 1, "restMult": 1},
+        "endurance": {"setsMult": 1, "repsMult": 1, "restMult": 1},
+    },
     "activation_p": {
         "strength": {"setsMult": 2, "repsMult": 1, "restMult": 1.5},
         "hypertrophy": {"setsMult": 1, "repsMult": 1.5, "restMult": 1},
         "endurance": {"setsMult": 1, "repsMult": 2, "restMult": 1},
     },
     "main_p": {
-        "strength": {"setsMult": 5, "repsMult": 5, "restMult": 180},
-        "hypertrophy": {"setsMult": 4, "repsMult": 8, "restMult": 120},
-        "endurance": {"setsMult": 3, "repsMult": 15, "restMult": 60},
+        "strength": {"setsMult": 2, "repsMult": 0.5, "restMult": 2.4},
+        "hypertrophy": {"setsMult": 1.5, "repsMult": 1, "restMult": 1},
+        "endurance": {"setsMult": 1, "repsMult": 2, "restMult": 1},
     },
     "accessory_p": {
-        "strength": {"setsMult": 3, "repsMult": 10, "restMult": 90},
-        "hypertrophy": {"setsMult": 3, "repsMult": 12, "restMult": 90},
-        "endurance": {"setsMult": 2, "repsMult": 15, "restMult": 60},
+        "strength": {"setsMult": 2, "repsMult": 1, "restMult": 1.5},
+        "hypertrophy": {"setsMult": 1.5, "repsMult": 1, "restMult": 0.8},
+        "endurance": {"setsMult": 1, "repsMult": 2, "restMult": 1},
     },
     "finisher_p": {
-        "strength": {"setsMult": 2, "repsMult": 10, "restMult": 60},
-        "hypertrophy": {"setsMult": 2, "repsMult": 12, "restMult": 60},
-        "endurance": {"setsMult": 2, "repsMult": 15, "restMult": 45},
+        "strength": {"setsMult": 1, "repsMult": 1, "restMult": 1},
+        "hypertrophy": {"setsMult": 1, "repsMult": 1, "restMult": 1},
+        "endurance": {"setsMult": 1, "repsMult": 1.2, "restMult": 1},
     },
 }

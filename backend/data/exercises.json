@@ -291,7 +291,7 @@
         "name": "Burpee",
         "description": "Perform a squat, plank, push-up, jump, and repeat.",
         "experienceLevel": 2,
-        "difficultyLevel": 7,
+        "difficultyLevel": 5,
         "primaryMuscles": ["Cardiovascular system"],
         "secondaryMuscles": ["Legs", "Chest", "Core"],
         "requiredEquipments": [],
