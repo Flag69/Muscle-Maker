@@ -74,11 +74,12 @@
         </label>
     </div>
 
-        <p>Selected muscle groups:</p>
-        <pre>{{ filters.targetedMuscleGroups }}</pre>
+    <!-- Debug helper -->
+    <!-- <p>Selected muscle groups:</p>
+    <pre>{{ filters.targetedMuscleGroups }}</pre>
 
-        <p>Selected available equipment:</p>
-        <pre>{{ filters.availableEquipments }}</pre>
+    <p>Selected available equipment:</p>
+    <pre>{{ filters.availableEquipments }}</pre> -->
 
 </template>
 

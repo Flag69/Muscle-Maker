@@ -2,9 +2,16 @@
   <h1>Muscle Maker</h1>
 
   <!-- Div to place filters -->
-  <div>
-    <filtersDisplay v-model="filters" />
-  </div>
+  <h4>Filters
+    <span>
+        <button @click="showFilters = !showFilters">
+          {{ showFilters ? "▼" : "▶" }}
+        </button>
+    </span>
+    <div v-if="showFilters">
+      <filtersDisplay v-model="filters" />
+    </div>
+  </h4>
 
   <!-- Div to place generation buttons -->
   <div>
@@ -26,6 +33,8 @@ import programDisplay from "@/components/programDisplay.vue"
 import filtersDisplay from "@/components/filtersDisplay.vue"
 
 const generatedProgram = ref(null)
+
+const showFilters = ref(false)
 
 const filters = ref({
   programDuration: 60,
