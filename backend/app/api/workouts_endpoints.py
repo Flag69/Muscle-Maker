@@ -12,8 +12,6 @@ router = APIRouter()
 @router.post("/workout")
 def get_workout(request: WorkoutResquest):
 
-    print(request)
-
     workout = generate_workout(
         SessionLocal(),
         programDuration=request.programDuration,
@@ -22,8 +20,6 @@ def get_workout(request: WorkoutResquest):
         targetedMuscleGroups=request.targetedMuscleGroups,
         availableEquipments=request.availableEquipments
     )
-
-    print(workout)
 
     return {
         "exercises": workout

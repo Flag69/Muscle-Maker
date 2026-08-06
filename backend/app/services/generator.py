@@ -2,7 +2,7 @@
 
 # TODO: stop exercises from being selected multiple times in the same workout
 # TODO: change mult ratios on get_program_params function
-from random import randint
+from random import randint, randrange
 
 from app.database.db_functions import get_all_exercises, get_random_exercises
 
@@ -41,12 +41,19 @@ def generate_workout(db_session, programDuration = 60, programDifficulty = 3, pr
 def add_exercises_to_workout(workout, exercises, programPart, programGoal):
     setsMult, repsMult, restMult = get_program_params(programPart, programGoal)
     for exercise in exercises:
+
+        if exercise.repsType == "time":
+            reps = max(1,round(exercise.defaultReps * repsMult) + randrange(-10, 10, 5))
+        elif exercise.repsType == "reps":
+            reps = max(1,round(exercise.defaultReps * repsMult) + randint(-1, 1))
+
         exo = {
             "Name": exercise.name,
             "Description": exercise.description,
             "Sets": max(1,round(exercise.defaultSets * setsMult)  + randint(-1, 1)),
-            "Reps": max(1,round(exercise.defaultReps * repsMult) + randint(-1, 1)),
-            "Rest": max(1,round(exercise.defaultRest * restMult) + randint(-1, 1))
+            "Reps": reps,
+            "Rest": max(1,round(exercise.defaultRest * restMult) + randint(-1, 1)),
+            "RepsType": exercise.repsType
         }
 
         workout.append(exo)

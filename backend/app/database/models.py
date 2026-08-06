@@ -23,3 +23,4 @@ class Exercise(Base):
     defaultReps = Column(Integer, nullable=True)
     defaultSets = Column(Integer, nullable=True)
     defaultRest = Column(Integer, nullable=True) # in seconds
+    repsType = Column(String, nullable=True) # "reps" or "time"

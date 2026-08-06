@@ -9,7 +9,8 @@
         "requiredEquipments": ["Barbell", "Bench"],
         "defaultReps": 8,
         "defaultSets": 4,
-        "defaultRest": 120
+        "defaultRest": 120,
+        "repsType": "reps"
     },
     {
         "name": "Incline Dumbbell Press",
@@ -21,7 +22,8 @@
         "requiredEquipments": ["Dumbbell", "Bench"],
         "defaultReps": 10,
         "defaultSets": 3,
-        "defaultRest": 90
+        "defaultRest": 90,
+        "repsType": "reps"
     },
     {
         "name": "Push-up",
@@ -33,7 +35,8 @@
         "requiredEquipments": [],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Cable Chest Fly",
@@ -45,7 +48,8 @@
         "requiredEquipments": ["Cable machine"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Barbell Squat",
@@ -57,7 +61,8 @@
         "requiredEquipments": ["Barbell", "Squat rack"],
         "defaultReps": 6,
         "defaultSets": 4,
-        "defaultRest": 180
+        "defaultRest": 180,
+        "repsType": "reps"
     },
     {
         "name": "Romanian Deadlift",
@@ -69,7 +74,8 @@
         "requiredEquipments": ["Barbell"],
         "defaultReps": 8,
         "defaultSets": 4,
-        "defaultRest": 150
+        "defaultRest": 150,
+        "repsType": "reps"
     },
     {
         "name": "Leg Press",
@@ -81,7 +87,8 @@
         "requiredEquipments": ["Weight machine"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 90
+        "defaultRest": 90,
+        "repsType": "reps"
     },
     {
         "name": "Walking Lunge",
@@ -93,7 +100,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Standing Calf Raise",
@@ -105,7 +113,8 @@
         "requiredEquipments": ["Weight machine"],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Pull-up",
@@ -117,7 +126,8 @@
         "requiredEquipments": ["Pull-up bar"],
         "defaultReps": 8,
         "defaultSets": 4,
-        "defaultRest": 120
+        "defaultRest": 120,
+        "repsType": "reps"
     },
     {
         "name": "Lat Pulldown",
@@ -129,7 +139,8 @@
         "requiredEquipments": ["Pulley machine"],
         "defaultReps": 10,
         "defaultSets": 3,
-        "defaultRest": 90
+        "defaultRest": 90,
+        "repsType": "reps"
     },
     {
         "name": "Barbell Bent-over Row",
@@ -141,7 +152,8 @@
         "requiredEquipments": ["Barbell"],
         "defaultReps": 8,
         "defaultSets": 4,
-        "defaultRest": 120
+        "defaultRest": 120,
+        "repsType": "reps"
     },
     {
         "name": "Seated Cable Row",
@@ -153,7 +165,8 @@
         "requiredEquipments": ["Cable machine"],
         "defaultReps": 10,
         "defaultSets": 3,
-        "defaultRest": 90
+        "defaultRest": 90,
+        "repsType": "reps"
     },
     {
         "name": "Face Pull",
@@ -165,7 +178,8 @@
         "requiredEquipments": ["Cable machine"],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Standing Overhead Press",
@@ -177,7 +191,8 @@
         "requiredEquipments": ["Barbell"],
         "defaultReps": 8,
         "defaultSets": 4,
-        "defaultRest": 120
+        "defaultRest": 120,
+        "repsType": "reps"
     },
     {
         "name": "Dumbbell Lateral Raise",
@@ -189,7 +204,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Barbell Curl",
@@ -201,7 +217,8 @@
         "requiredEquipments": ["Barbell"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Cable Triceps Pushdown",
@@ -213,7 +230,8 @@
         "requiredEquipments": ["Cable machine"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Hammer Curl",
@@ -225,7 +243,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Parallel Bar Dip",
@@ -237,7 +256,8 @@
         "requiredEquipments": [],
         "defaultReps": 10,
         "defaultSets": 3,
-        "defaultRest": 90
+        "defaultRest": 90,
+        "repsType": "reps"
     },
     {
         "name": "Plank",
@@ -249,7 +269,8 @@
         "requiredEquipments": [],
         "defaultReps": 45,
         "defaultSets": 3,
-        "defaultRest": 30
+        "defaultRest": 30,
+        "repsType": "time"
     },
     {
         "name": "Hanging Leg Raise",
@@ -261,7 +282,8 @@
         "requiredEquipments": ["Pull-up bar"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Russian Twist",
@@ -273,7 +295,8 @@
         "requiredEquipments": ["Medicine ball"],
         "defaultReps": 20,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Mountain Climber",
@@ -285,7 +308,8 @@
         "requiredEquipments": [],
         "defaultReps": 30,
         "defaultSets": 3,
-        "defaultRest": 30
+        "defaultRest": 30,
+        "repsType": "time"
     },
     {
         "name": "Burpee",
@@ -297,7 +321,8 @@
         "requiredEquipments": [],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Goblet Squat",
@@ -309,7 +334,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Glute Bridge",
@@ -321,7 +347,8 @@
         "requiredEquipments": [],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Single-arm Dumbbell Row",
@@ -333,7 +360,8 @@
         "requiredEquipments": ["Dumbbell", "Bench"],
         "defaultReps": 10,
         "defaultSets": 3,
-        "defaultRest": 75
+        "defaultRest": 75,
+        "repsType": "reps"
     },
     {
         "name": "Resistance Band Row",
@@ -345,7 +373,8 @@
         "requiredEquipments": ["Resistance band"],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Chest-supported Dumbbell Row",
@@ -357,7 +386,8 @@
         "requiredEquipments": ["Bench", "Dumbbell"],
         "defaultReps": 10,
         "defaultSets": 3,
-        "defaultRest": 75
+        "defaultRest": 75,
+        "repsType": "reps"
     },
     {
         "name": "Reverse Fly",
@@ -369,7 +399,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Front Raise",
@@ -381,7 +412,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Arnold Press",
@@ -393,7 +425,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 10,
         "defaultSets": 3,
-        "defaultRest": 90
+        "defaultRest": 90,
+        "repsType": "reps"
     },
     {
         "name": "Resistance Band Pull-apart",
@@ -405,7 +438,8 @@
         "requiredEquipments": ["Resistance band"],
         "defaultReps": 20,
         "defaultSets": 3,
-        "defaultRest": 30
+        "defaultRest": 30,
+        "repsType": "reps"
     },
     {
         "name": "Concentration Curl",
@@ -417,7 +451,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Overhead Dumbbell Triceps Extension",
@@ -429,7 +464,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Close-grip Push-up",
@@ -441,7 +477,8 @@
         "requiredEquipments": [],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Cable Biceps Curl",
@@ -453,7 +490,8 @@
         "requiredEquipments": ["Cable machine"],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "reps"
     },
     {
         "name": "Dead Bug",
@@ -465,7 +503,8 @@
         "requiredEquipments": [],
         "defaultReps": 12,
         "defaultSets": 3,
-        "defaultRest": 30
+        "defaultRest": 30,
+        "repsType": "reps"
     },
     {
         "name": "Bicycle Crunch",
@@ -477,7 +516,8 @@
         "requiredEquipments": [],
         "defaultReps": 20,
         "defaultSets": 3,
-        "defaultRest": 30
+        "defaultRest": 30,
+        "repsType": "reps"
     },
     {
         "name": "Farmer's Carry",
@@ -489,7 +529,8 @@
         "requiredEquipments": ["Dumbbell"],
         "defaultReps": 40,
         "defaultSets": 3,
-        "defaultRest": 60
+        "defaultRest": 60,
+        "repsType": "time"
     },
     {
         "name": "Jump Rope",
@@ -501,7 +542,8 @@
         "requiredEquipments": [],
         "defaultReps": 60,
         "defaultSets": 3,
-        "defaultRest": 30
+        "defaultRest": 30,
+        "repsType": "time"
     },
     {
         "name": "Jumping Jack",
@@ -513,7 +555,8 @@
         "requiredEquipments": [],
         "defaultReps": 40,
         "defaultSets": 3,
-        "defaultRest": 30
+        "defaultRest": 30,
+        "repsType": "time"
     },
     {
         "name": "Incline Push-up",
@@ -525,7 +568,8 @@
         "requiredEquipments": ["Bench"],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     },
     {
         "name": "Resistance Band Chest Press",
@@ -537,6 +581,7 @@
         "requiredEquipments": ["Resistance band"],
         "defaultReps": 15,
         "defaultSets": 3,
-        "defaultRest": 45
+        "defaultRest": 45,
+        "repsType": "reps"
     }
 ]
