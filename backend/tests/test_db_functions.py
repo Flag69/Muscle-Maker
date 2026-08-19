@@ -45,7 +45,6 @@ def test_get_random_exercises_params_3():
     for exo in exos:
         assert exo.experienceLevel <= 2
         assert exo.difficultyLevel <= 4
-        print(exo.name, exo.primaryMuscles)
         assert "Cardiovascular system" in exo.primaryMuscles
     assert len(exos) == 3
     db_session.close()
@@ -56,7 +55,6 @@ def test_get_random_exercises_params_4():
     for exo in exos:
         assert exo.experienceLevel <= 4
         assert exo.difficultyLevel <= 3
-        print(exo.name, exo.primaryMuscles)
         assert "Cardiovascular system" in exo.primaryMuscles
     assert len(exos) == 1
     db_session.close()
@@ -67,9 +65,20 @@ def test_get_random_exercises_params_5():
     for exo in exos:
         assert exo.experienceLevel <= 3
         assert exo.difficultyLevel <= 3
-        print(exo.name, exo.primaryMuscles)
         assert "Cardiovascular system" in exo.primaryMuscles
     assert len(exos) == 1
+    db_session.close()
+
+# Problem with plural of exercises name !
+def test_get_random_exercises_params_6():
+    db_session = SessionLocal()
+    exos = get_random_exercises(db_session, 3, 3, 3, ["Everything"], "main", ["Dumbbell", "Barbell", "Kettlebell"])
+    for exo in exos:
+        assert exo.experienceLevel <= 3
+        assert exo.difficultyLevel <= 3
+        assert set(exo.requiredEquipments).issubset({"Dumbbell", "Barbell", "Kettlebell"})
+        print(exo.name, exo.requiredEquipments)
+    assert len(exos) == 3
     db_session.close()
 
 def test_get_random_exercises_params_exclusion_1():
@@ -79,7 +88,6 @@ def test_get_random_exercises_params_exclusion_1():
     for exo in exos:
         assert exo.experienceLevel <= 3
         assert exo.difficultyLevel <= 3
-        print(exo.name, exo.primaryMuscles)
         assert exo not in exos_to_exclude
     assert len(exos) == 1
     db_session.close()
@@ -91,7 +99,6 @@ def test_get_random_exercises_params_exclusion_2():
     for exo in exos:
         assert exo.experienceLevel <= 3
         assert exo.difficultyLevel <= 3
-        print(exo.name, exo.primaryMuscles)
         assert exo not in exos_to_exclude
     assert len(exos) == 1
     db_session.close()

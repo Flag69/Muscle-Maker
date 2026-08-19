@@ -34,7 +34,6 @@ def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLev
     exercises = query.all()
 
     filtered_exercises = []
-    available_equipment_set = (set(availableEquipments) if availableEquipments else None)
 
     for exercise in exercises:
 
@@ -58,9 +57,12 @@ def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLev
                     if not muscleIsTargeted:
                         continue
 
-        if available_equipment_set:
-            if not set(exercise.requiredEquipments).issubset(available_equipment_set):
+        if availableEquipments != None and availableEquipments != ["Everything"]:
+            if availableEquipments == ["Nothing (bodyweight only)"] and exercise.requiredEquipments != []:
                 continue
+            else:
+                if not set(exercise.requiredEquipments).issubset(set(availableEquipments)):
+                    continue
 
         filtered_exercises.append(exercise)
 
