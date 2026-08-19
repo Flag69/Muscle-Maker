@@ -54,8 +54,8 @@ def test_get_random_exercises_params_4():
     db_session = SessionLocal()
     exos = get_random_exercises(db_session, 1, 4, 3, ["Cardiovascular system"], "main", ["Everything"])
     for exo in exos:
-        assert exo.experienceLevel <= 2
-        assert exo.difficultyLevel <= 4
+        assert exo.experienceLevel <= 4
+        assert exo.difficultyLevel <= 3
         print(exo.name, exo.primaryMuscles)
         assert "Cardiovascular system" in exo.primaryMuscles
     assert len(exos) == 1
@@ -65,15 +65,36 @@ def test_get_random_exercises_params_5():
     db_session = SessionLocal()
     exos = get_random_exercises(db_session, 1, 3, 3, ["Cardiovascular system"], "main", ["Everything"])
     for exo in exos:
-        assert exo.experienceLevel <= 2
-        assert exo.difficultyLevel <= 4
+        assert exo.experienceLevel <= 3
+        assert exo.difficultyLevel <= 3
         print(exo.name, exo.primaryMuscles)
         assert "Cardiovascular system" in exo.primaryMuscles
     assert len(exos) == 1
     db_session.close()
 
+def test_get_random_exercises_params_exclusion_1():
+    db_session = SessionLocal()
+    exos_to_exclude = get_random_exercises(db_session, 3, 3, 3, ["Everything"], "main", ["Everything"])
+    exos = get_random_exercises(db_session, 1, 3, 3, ["Everything"], "main", ["Everything"], exercisesToExclude=exos_to_exclude)
+    for exo in exos:
+        assert exo.experienceLevel <= 3
+        assert exo.difficultyLevel <= 3
+        print(exo.name, exo.primaryMuscles)
+        assert exo not in exos_to_exclude
+    assert len(exos) == 1
+    db_session.close()
 
-
+def test_get_random_exercises_params_exclusion_2():
+    db_session = SessionLocal()
+    exos_to_exclude = get_random_exercises(db_session, 3, 3, 3, ["Everything"], "main", ["Everything"])
+    exos = get_random_exercises(db_session, 1, 3, 3, ["Everything"], "main", ["Everything"], exercisesToExclude=exos_to_exclude)
+    for exo in exos:
+        assert exo.experienceLevel <= 3
+        assert exo.difficultyLevel <= 3
+        print(exo.name, exo.primaryMuscles)
+        assert exo not in exos_to_exclude
+    assert len(exos) == 1
+    db_session.close()
 
 def test_get_all_exercises():
     db_session = SessionLocal()

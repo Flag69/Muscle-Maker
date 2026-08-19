@@ -1,34 +1,49 @@
 # Contains functions for workout generation and manipulation
 
-# TODO: stop exercises from being selected multiple times in the same workout
-# TODO: change mult ratios on get_program_params function
 from random import randint, randrange
 
 from app.database.db_functions import get_all_exercises, get_random_exercises
 
 def generate_workout(db_session, programDuration = 60, programDifficulty = 3, programGoal = None, targetedMuscleGroups = None, availableEquipments = None):
     workout = []
+    exercises_to_exclude = []
     
 
     match programDuration:
         case 45 | 60:
-            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments)
-            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
-            main_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(warm_up_p)
+            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(activation_p)
+            main_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(main_p)
             accessory_p = []
-            finisher_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
+            exercises_to_exclude.extend(accessory_p)
+            finisher_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(finisher_p)
+
         case 75 | 90:
-            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments)
-            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
-            main_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
-            accessory_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 6, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
-            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(warm_up_p)
+            activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(activation_p)
+            main_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(main_p)
+            accessory_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 6, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(accessory_p)
+            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(finisher_p)
         case 105 | 120:
-            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments)
-            activation_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments)
-            main_p = get_random_exercises(db_session, count=4, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments)
-            accessory_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 6, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
-            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(warm_up_p)
+            activation_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(activation_p)
+            main_p = get_random_exercises(db_session, count=4, experienceLevel = programDifficulty, difficultyLevel = 7, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(main_p)
+            accessory_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 6, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(accessory_p)
+            finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            exercises_to_exclude.extend(finisher_p)
 
     workout = add_exercises_to_workout(workout, warm_up_p, "warm_up_p", programGoal)
     workout = add_exercises_to_workout(workout, activation_p, "activation_p", programGoal)
@@ -52,7 +67,7 @@ def add_exercises_to_workout(workout, exercises, programPart, programGoal):
             "Description": exercise.description,
             "Sets": max(1,round(exercise.defaultSets * setsMult)  + randint(-1, 1)),
             "Reps": reps,
-            "Rest": max(1,round(exercise.defaultRest * restMult) + randint(-1, 1)),
+            "Rest": max(1,round(exercise.defaultRest * restMult) + randrange(-10, 10, 5)),
             "RepsType": exercise.repsType
         }
 

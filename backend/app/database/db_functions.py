@@ -15,8 +15,16 @@ def get_all_exercises(db_session):
     return db_session.query(Exercise).all()
 
 # Get random exercises based on different criterias
-def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLevel = 10, targetedMuscleGroups = None, targetedMuscleType = "main", availableEquipments = None):
+def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLevel = 10, targetedMuscleGroups = None, targetedMuscleType = "main", availableEquipments = None, exercisesToExclude = None):
     query = db_session.query(Exercise)
+
+    if exercisesToExclude:
+        excluded_id = []
+
+        for exercise in exercisesToExclude:
+            excluded_id.append(exercise.id)
+
+        query = query.filter(Exercise.id.notin_(excluded_id))
 
     if experienceLevel:
         query = query.filter(Exercise.experienceLevel <= experienceLevel)
@@ -53,6 +61,7 @@ def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLev
         if available_equipment_set:
             if not set(exercise.requiredEquipments).issubset(available_equipment_set):
                 continue
+
         filtered_exercises.append(exercise)
 
 

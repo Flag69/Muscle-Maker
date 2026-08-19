@@ -1,5 +1,3 @@
 -Make nice but simple UI
--Fix sets/reps/time
--Fix same exercises mutliple times
--Add many mor exercises
+-Add a lot more exercises
 

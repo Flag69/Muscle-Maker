@@ -6,7 +6,7 @@
         <div v-for="exercise in generatedProgram.exercises" :key="exercise.name" class="exercise-card">
             <h3>{{ exercise.Name }}</h3>
             <p>{{ exercise.Description }}</p>
-            <p>{{ exercise.Sets }} x {{ exercise.Reps }} {{ exercise.RepsType === "time" ? "s" : "reps" }}</p>
+            <p>{{ exercise.Sets }} x {{ exercise.Reps }} {{ exercise.RepsType === "time" ? "s" : "reps" }} {{ exercise.Sets > 1 ? ", " + exercise.Rest + "s rest" : ""}}</p>
         </div>
         
     </div>
