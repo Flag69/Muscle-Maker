@@ -11,7 +11,7 @@ def generate_workout(db_session, programDuration = 60, programDifficulty = 3, pr
 
     match programDuration:
         case 45 | 60:
-            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
             exercises_to_exclude.extend(warm_up_p)
             activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
             exercises_to_exclude.extend(activation_p)
@@ -23,7 +23,7 @@ def generate_workout(db_session, programDuration = 60, programDifficulty = 3, pr
             exercises_to_exclude.extend(finisher_p)
 
         case 75 | 90:
-            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
             exercises_to_exclude.extend(warm_up_p)
             activation_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
             exercises_to_exclude.extend(activation_p)
@@ -34,7 +34,7 @@ def generate_workout(db_session, programDuration = 60, programDifficulty = 3, pr
             finisher_p = get_random_exercises(db_session, count=2, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "any", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
             exercises_to_exclude.extend(finisher_p)
         case 105 | 120:
-            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 3, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
+            warm_up_p = get_random_exercises(db_session, count=1, experienceLevel = programDifficulty, difficultyLevel = 4, targetedMuscleGroups = ["Cardiovascular system"], targetedMuscleType = "main", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
             exercises_to_exclude.extend(warm_up_p)
             activation_p = get_random_exercises(db_session, count=3, experienceLevel = programDifficulty, difficultyLevel = 5, targetedMuscleGroups = targetedMuscleGroups, targetedMuscleType = "secondary", availableEquipments = availableEquipments, exercisesToExclude=exercises_to_exclude)
             exercises_to_exclude.extend(activation_p)
@@ -58,14 +58,20 @@ def add_exercises_to_workout(workout, exercises, programPart, programGoal):
     for exercise in exercises:
 
         if exercise.repsType == "time":
-            reps = max(1,round(exercise.defaultReps * repsMult) + randrange(-10, 10, 5))
+            if exercise.defaultReps >= 180:
+                reps = max(1,round(exercise.defaultReps * repsMult) + randrange(-60, 60, 30))
+                sets = 1
+            else:
+                reps = max(1,round(exercise.defaultReps * repsMult) + randrange(-10, 10, 5))
+                sets = max(1,round(exercise.defaultSets * setsMult)  + randint(-1, 1))
         elif exercise.repsType == "reps":
             reps = max(1,round(exercise.defaultReps * repsMult) + randint(-1, 1))
+            sets = max(1,round(exercise.defaultSets * setsMult)  + randint(-1, 1))
 
         exo = {
             "Name": exercise.name,
             "Description": exercise.description,
-            "Sets": max(1,round(exercise.defaultSets * setsMult)  + randint(-1, 1)),
+            "Sets": sets,
             "Reps": reps,
             "Rest": max(1,round(exercise.defaultRest * restMult) + randrange(-10, 10, 5)),
             "RepsType": exercise.repsType

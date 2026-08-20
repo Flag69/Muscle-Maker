@@ -23,12 +23,18 @@
     <programDisplay :generatedProgram="generatedProgram" />
   </div> 
 
+  <!-- Div to place pdf download button -->
+  <div v-if="generatedProgram">
+    <pdfButton @generatePdf="handleGeneratePdf" />
+  </div>
+
 </template>
 
 <script setup>
 import { ref } from "vue"
-import { generate_program } from "@/services/api"
+import { generate_program, generate_pdf } from "@/services/api"
 import generateButton from "@/components/generateButton.vue"
+import pdfButton from "@/components/pdfButton.vue"
 import programDisplay from "@/components/programDisplay.vue"
 import filtersDisplay from "@/components/filtersDisplay.vue"
 
@@ -38,7 +44,7 @@ const showFilters = ref(false)
 
 const filters = ref({
   programDuration: 60,
-  programDifficulty: 1,
+  programDifficulty: 4,
   programGoal: "no particular goal",
   targetedMuscleGroups: ["Everything"],
   availableEquipments: ["Everything"]
@@ -56,9 +62,17 @@ async function handleGenerateProgram() {
   )
 }
 
+async function handleGeneratePdf() {
+  await generate_pdf(generatedProgram.value)
+}
+
 </script>
 
 <style scoped>
+
+h1 {
+  font-size: 1.6rem;
+}
 
 
 </style>

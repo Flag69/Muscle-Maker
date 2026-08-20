@@ -1,8 +1,11 @@
 # Endpoint for workouts generation/fetching
 
 from fastapi import APIRouter
+from fastapi.responses import StreamingResponse
+
 from app.services.generator import generate_workout
-from app.schemas.workout import WorkoutResquest
+from app.services.pdf_generator import generate_workout_pdf
+from app.schemas.workout import WorkoutRequest, GeneratedWorkout
 
 # Used if the endpoint needs a session to the db
 from app.database.db import SessionLocal 
@@ -10,7 +13,7 @@ from app.database.db import SessionLocal
 router = APIRouter()
 
 @router.post("/workout")
-def get_workout(request: WorkoutResquest):
+def get_workout(request: WorkoutRequest):
 
     workout = generate_workout(
         SessionLocal(),
@@ -24,3 +27,14 @@ def get_workout(request: WorkoutResquest):
     return {
         "exercises": workout
     }
+
+@router.post("/workout/pdf")
+def download_workout_pdf(workout: GeneratedWorkout):
+
+    pdf = generate_workout_pdf(workout)
+
+    return StreamingResponse(
+        pdf,
+        media_type="application/pdf",
+        headers={"Content-Disposition": "attachment; filename=workout.pdf"}
+    )

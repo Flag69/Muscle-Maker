@@ -1,19 +1,19 @@
 <template>
-    <button @click="$emit('generateProgram')">Generate program</button>
+    <button @click="$emit('generatePdf')">Generate PDF</button>
 </template>
 
 <script setup>
 
-defineEmits(['generateProgram'])
+defineEmits(['generatePdf'])
 
 </script>
 
 <style scoped>
 
 button {
-    background-color: #94e697;
+    background-color: #f38459;
     border: 1px solid black;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     padding: 12px 24px;
     text-align: center;
     text-decoration: none;
@@ -26,8 +26,8 @@ button {
 }
 
 button:hover {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #d4a6a6;
+    color: rgb(255, 116, 116);
 }
 
 button:active {
