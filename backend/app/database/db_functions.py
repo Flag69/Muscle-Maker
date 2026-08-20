@@ -56,6 +56,7 @@ def get_random_exercises(db_session, count=1, experienceLevel = 4, difficultyLev
                             break
                     if not muscleIsTargeted:
                         continue
+                    # TODO : Add a case for "any" targetedMuscleType if needed
 
         if availableEquipments != None and availableEquipments != ["Everything"]:
             if availableEquipments == ["Nothing (bodyweight only)"] and exercise.requiredEquipments != []:
