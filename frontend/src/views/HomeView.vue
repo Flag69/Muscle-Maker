@@ -26,6 +26,8 @@
   <!-- Div to place pdf download button -->
   <div v-if="generatedProgram">
     <pdfButton @generatePdf="handleGeneratePdf" />
+
+      <pdfFiltersDisplay v-model="pdfFilters" />  
   </div>
 
 </template>
@@ -37,6 +39,7 @@ import generateButton from "@/components/generateButton.vue"
 import pdfButton from "@/components/pdfButton.vue"
 import programDisplay from "@/components/programDisplay.vue"
 import filtersDisplay from "@/components/filtersDisplay.vue"
+import pdfFiltersDisplay from "@/components/pdfFiltersDisplay.vue"
 
 const generatedProgram = ref(null)
 
@@ -49,6 +52,12 @@ const filters = ref({
   targetedMuscleGroups: ["Everything"],
   availableEquipments: ["Everything"]
 })
+
+const pdfFilters = ref({
+  programName: "Amazing workout program",
+  showDescriptions: true,
+})
+
 
 async function handleGenerateProgram() {
   generatedProgram.value = await generate_program(
@@ -63,7 +72,7 @@ async function handleGenerateProgram() {
 }
 
 async function handleGeneratePdf() {
-  await generate_pdf(generatedProgram.value)
+  await generate_pdf(generatedProgram.value, pdfFilters.value)
 }
 
 </script>

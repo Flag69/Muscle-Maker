@@ -22,7 +22,7 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 4px;
-    box-shadow: 3px 3px #194e1b;
+    box-shadow: 3px 3px #582929;
 }
 
 button:hover {

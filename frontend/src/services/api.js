@@ -12,14 +12,14 @@ export async function generate_program(filters) {
     return data
 }
 
-export async function generate_pdf(workout) {
+export async function generate_pdf(workout, pdfFilters) {
 
     const response = await fetch(API_URL + "/workout/pdf", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        body: JSON.stringify(workout)
+        body: JSON.stringify({ workout: workout, pdfFilters: pdfFilters })
     })
 
     if (!response.ok) {

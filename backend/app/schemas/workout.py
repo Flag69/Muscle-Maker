@@ -20,3 +20,12 @@ class WorkoutExercise(BaseModel):
 
 class GeneratedWorkout(BaseModel):
     exercises: list[WorkoutExercise]
+
+class PdfFilters(BaseModel):
+    programName: str
+    showDescriptions: bool
+
+
+class PdfRequest(BaseModel):
+    workout: GeneratedWorkout
+    pdfFilters: PdfFilters
